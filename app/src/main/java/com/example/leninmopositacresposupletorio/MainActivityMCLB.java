@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class MainActivityMCLB extends AppCompatActivity {
     private EditText txtcedula;
     private EditText txtcontraseña;
@@ -43,7 +41,7 @@ public class MainActivityMCLB extends AppCompatActivity {
         user = dal.selectByCedula(cedula);
         if(!cedula.equals("") && !contraseña.equals("")){
             if(cedula.equals(user.getCedula()) && contraseña.equals(user.getContraseña())){
-                Intent intent = new Intent(this,CrearMCLB.class);
+                Intent intent = new Intent(this, ActivityCrearMCLB.class);
                 startActivity(intent);
             }else{
                 Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();

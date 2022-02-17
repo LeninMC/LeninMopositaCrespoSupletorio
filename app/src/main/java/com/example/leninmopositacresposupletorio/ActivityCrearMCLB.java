@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -18,9 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-public class CrearMCLB extends AppCompatActivity {
+public class ActivityCrearMCLB extends AppCompatActivity {
 
     private Spinner spinnerUsuarios;
     //private DatabaseReference databaseReference;
@@ -42,7 +40,7 @@ public class CrearMCLB extends AppCompatActivity {
         multi = findViewById(R.id.editTextDescripcion);
 
 
-        tipo_tarea_aj();
+       /* tipo_tarea_aj();
         spinnerUsuarios.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -57,8 +55,11 @@ public class CrearMCLB extends AppCompatActivity {
 
             }
         });
+
+        */
     }
 
+    /*
     @Override
     public  boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_creacion_mclb,menu);
@@ -70,7 +71,7 @@ public class CrearMCLB extends AppCompatActivity {
         int id = menuItem.getItemId();
 
         if (id == R.id.guardar){
-            Toast.makeText(CrearMCLB.this, "Guardar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActivityCrearMCLB.this, "Guardar", Toast.LENGTH_SHORT).show();
 
                 Bundle bundle = getIntent().getExtras();
                 nombre = bundle.getString("mail").toString();
@@ -89,17 +90,17 @@ public class CrearMCLB extends AppCompatActivity {
 
         }
         if (id == R.id.cancelar){
-            Toast.makeText(CrearMCLB.this, "Opcion 1s", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActivityCrearMCLB.this, "Opcion 1s", Toast.LENGTH_SHORT).show();
             finish();
         }
         if (id == R.id.cerrar_sesion){
             //FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(CrearMCLB.this, MainActivityMCLB.class));
+            startActivity(new Intent(ActivityCrearMCLB.this, MainActivityMCLB.class));
 
         }
             return super.onOptionsItemSelected(menuItem);
     }
-
+*/
     public void tipo_tarea_aj() {
         final List<Tipo_Tarea_MCLB> categorias = new ArrayList<>();
         //databaseReference.child("Tipo_Tarea").addListenerForSingleValueEvent(new ValueEventListener() {
