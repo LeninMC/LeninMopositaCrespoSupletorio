@@ -20,13 +20,20 @@ public class MainActivityMCLB extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         txtcedula = findViewById(R.id.edittext_usuario);
-        txtcedula = findViewById(R.id.edittext_password);
+        txtcontraseña = findViewById(R.id.edittext_password);
 
         btnEntrar = findViewById(R.id.buttonEntrar);
         btnIrRegistrar = findViewById(R.id.buttonirRegistrar);
     }
     public void onClicIrRegistrar(View view){
         irRegistrar();
+    }
+    public void onClicEntrar(View view){
+        entrar();
+    }
+
+    private void entrar() {
+        String cedula = txtcedula.getText().toString();
     }
 
     private void irRegistrar() {
