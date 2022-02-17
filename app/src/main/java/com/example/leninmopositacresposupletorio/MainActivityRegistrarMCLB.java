@@ -45,115 +45,81 @@ public class MainActivityRegistrarMCLB extends AppCompatActivity {
         usuario.setApellido(apellido);
         usuario.setContraseña(contraseña);
         if(!nombre.equals("") && !apellido.equals("") && !apellido.equals("")) {
-            long cant = dal.insert(usuario);
-            //limpiar controles
-            txtcedula.setText("");
-            txtnombre.setText("");
-            txtapellido.setText("");
-            txtcontraseña.setText("");
-            if(cant > 0){
-                Toast.makeText(this, "Se inserto un usuario", Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(this, "No se inserto ningun campo", Toast.LENGTH_SHORT).show();
-            }
+          if(esCedula(cedula)){
+              long cant = dal.insert(usuario);
+              //limpiar controles
+              txtcedula.setText("");
+              txtnombre.setText("");
+              txtapellido.setText("");
+              txtcontraseña.setText("");
+              if(cant > 0){
+                  Toast.makeText(this, "Se inserto un usuario", Toast.LENGTH_SHORT).show();
+              }else{
+                  Toast.makeText(this, "No se inserto ningun campo", Toast.LENGTH_SHORT).show();
+              }
+          }else{
+              Toast.makeText(this, "La Cedula es incorrecta", Toast.LENGTH_SHORT).show();
+          }
 
         }else{
             Toast.makeText(this, "Campos obligatorios", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private Boolean validarCedula(String cedula){
-        if (cedula.length() == 10) {
-            //Obtenemos el digito de la region que sonlos dos primeros digitos
-            String digito_region = cedula.substring(0, 2);
-            ///TODO
-            //Pregunto si la region existe ecuador se divide en 24 regiones
-            if (Integer.parseInt(digito_region) >= 1 && Integer.parseInt(digito_region) <= 24) {
 
-                // Extraigo el ultimo digito
-                String ultimo_digito = cedula.substring(9, 10);
-
-                //Agrupo todos los pares y los sumo
-                int uno = Integer.parseInt(cedula.substring(1, 2));
-                int dos = Integer.parseInt(cedula.substring(3, 4));
-                int tres = Integer.parseInt(cedula.substring(5, 6));
-                int cuatro = Integer.parseInt(cedula.substring(7, 8));
-
-                //var cinco = cedula.substring(9, 10).toInt()
-                int pares = uno + dos + tres + cuatro;
-//                var pares = cedula.substring(1, 2).toInt() + cedula.substring(3, 4).toInt()
-//                + cedula.substring(5, 6).toInt() + cedula.substring(7, 8).toInt()
-
-                //Agrupo los impares, los multiplico por un factor de 2, si la resultante es > que 9 le restamos el 9 a la resultante
-                String numero1 = cedula.substring(0, 1);
-                numero1 = (Integer.parseInt(numero1) * 2).toString();
-                if (Integer.parseInt(numero1) > 9) {
-                    numero1= (Integer.parseInt(numero1) - 9).toString(); }
-
-                var numero3 = cedula.substring(2, 3)
-                numero3 = (Integer.parseInt(numero3) * 2).toString()
-                if (numero3.toInt() > 9) {
-                    numero3 = (Integer.parseInt(numero3) - 9).toString() }
-
-                var numero5 = cedula.substring(4, 5)
-                numero5 = (numero5.toInt() * 2).toString()
-                if (numero5.toInt() > 9) {
-                    numero5 = (numero5.toInt() - 9).toString() }
-
-                var numero7 = cedula.substring(6, 7)
-                numero7 = (numero7.toInt() * 2).toString()
-                if (numero7.toInt() > 9) {
-                    numero7 = (numero7.toInt() - 9).toString() }
-
-                var numero9 = cedula.substring(8, 9)
-                numero9 = (numero9.toInt() * 2).toString()
-                if (numero9.toInt() > 9) {
-                    numero9 = (numero9.toInt() - 9).toString() }
-
-                var impares = numero1.toInt() + numero3.toInt() + numero5.toInt() + numero7.toInt() + numero9.toInt()
-
-                //Suma total
-                var suma_total = (pares + impares)
-
-                //extraemos el primero digito
-                var primer_digito_suma = (suma_total).toString().substring(0, 1)
-
-                //Obtenemos la decena inmediata
-                var decena = (primer_digito_suma.toInt() + 1) * 10
-
-                //Obtenemos la resta de la decena inmediata - la suma_total esto nos da el digito validador
-                var digito_validador = decena - suma_total
-
-                //Si el digito validador es = a 10 toma el valor de 0
-                if (digito_validador == 10) {
-                    digito_validador = 0
+    public boolean esCedula(String cedula) {
+        boolean cedulaCorrecta;
+        try {
+            if (cedula.length() == 10) {
+                // Coeficientes de validación cédula
+                // El decimo digito se lo considera dígito verificador
+                int[] coefValCedula = {2, 1, 2, 1, 2, 1, 2, 1, 2};
+                int verificador = Integer.parseInt(cedula.substring(9, 10));
+                int suma = 0;
+                int digito;
+                for (int i = 0; i < (cedula.length() - 1); i++) {
+                    digito = Integer.parseInt(cedula.substring(i, i + 1)) * coefValCedula[i];
+                    suma += ((digito % 10) + (digito / 10));
                 }
-
-
-                //Validamos que el digito validador sea igual al de la cedula
-                if (digito_validador == ultimo_digito.toInt()) {
-
-                    Toast.makeText(this, "La Cedula es Correcta 👍🏻👍🏻", Toast.LENGTH_SHORT)
-                            .show()
-                    return true
-                } else {
-
-                    Toast.makeText(this, "La Cedula es InCorrecta ⚠️⚠️", Toast.LENGTH_SHORT).show()
-                    return false
-                }
+                cedulaCorrecta = ((suma % 10 == 0 && verificador == 0) || (10 - suma % 10 == verificador));
             } else {
-                Toast.makeText(this, "La cedula no pertenerce a ninguna region ⚠️", Toast.LENGTH_SHORT)
-                        .show()
-                return false
+                cedulaCorrecta = false;
             }
-
-
-            //TODO
-
-        } else {
-            Toast.makeText(this, "La cedula Tiene menos o mas de 10 Digitos ⚠️", Toast.LENGTH_SHORT)
-                    .show()
-            return false
+        } catch (Exception e) {
+            cedulaCorrecta = false;
         }
+        return cedulaCorrecta;
     }
+    public boolean validar_Password(String password){
+        int continuos = 0;
+        int numero = 0;
+        int especial = 0;
+        int fin = 0xFF.toChar();
+        int minuscula = 0;
+        int mayuscula = 0;
+        boolean es_validar = true;
+        if (password.length() < 6 || password.length() > 10) return false
+        for (i in 0; password.length) {
+            val c = password[i]
+            if (c <= ' ' || c > '~') {
+                es_validar = false
+                break
+            }
+            if (c > ' ' && c < '0' || c >= ':' && c < 'A' || c >= '[' && c < 'a' || c >= '{' && c.toInt() < 127) {
+                especial++
+            }
+            if (c >= '0' && c < ':') numero++
+            if (c >= 'A' && c < '[') mayuscula++
+            if (c >= 'a' && c < '{') minuscula++
+            continuos = if (c == fin) continuos + 1 else 0
+            if (continuos >= 7) {
+                es_validar = false
+                break
+            }
+            fin = c
+        }
+        es_validar = es_validar && especial > 0 && numero > 0 && minuscula > 0 && mayuscula > 0
+        return es_validar
+    }
+
 }
