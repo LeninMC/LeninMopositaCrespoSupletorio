@@ -41,9 +41,12 @@ public class MainActivityMCLB extends AppCompatActivity {
         String cedula = txtcedula.getText().toString();
         String contraseña = txtcontraseña.getText().toString();
         user = dal.selectByCedula(cedula);
-        if(!cedula.equals("") && cedula.equals("")){
+        if(!cedula.equals("") && !contraseña.equals("")){
             if(cedula.equals(user.getCedula()) && contraseña.equals(user.getContraseña())){
-
+                Intent intent = new Intent(this,MainActivityListMCLB.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
             }
         }else{
             Toast.makeText(this, "Campos obligatorios", Toast.LENGTH_SHORT).show();
