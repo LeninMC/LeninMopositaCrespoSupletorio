@@ -61,6 +61,7 @@
             android:layout_marginRight="20dp"
             android:hint="Contraseña"
             android:inputType="text"
+            android:maxLength="10"
             android:padding="15dp" />
         <Button
             android:id="@+id/buttonRegistrar"

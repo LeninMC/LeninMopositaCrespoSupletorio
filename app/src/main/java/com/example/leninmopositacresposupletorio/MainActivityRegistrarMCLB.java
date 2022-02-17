@@ -46,17 +46,24 @@ public class MainActivityRegistrarMCLB extends AppCompatActivity {
         usuario.setContraseña(contraseña);
         if(!nombre.equals("") && !apellido.equals("") && !apellido.equals("")) {
           if(esCedula(cedula)){
-              long cant = dal.insert(usuario);
-              //limpiar controles
-              txtcedula.setText("");
-              txtnombre.setText("");
-              txtapellido.setText("");
-              txtcontraseña.setText("");
-              if(cant > 0){
-                  Toast.makeText(this, "Se inserto un usuario", Toast.LENGTH_SHORT).show();
-              }else{
-                  Toast.makeText(this, "No se inserto ningun campo", Toast.LENGTH_SHORT).show();
-              }
+             if(validarContraseña(contraseña)){
+                 long cant = dal.insert(usuario);
+                 //limpiar controles
+                 txtcedula.setText("");
+                 txtnombre.setText("");
+                 txtapellido.setText("");
+                 txtcontraseña.setText("");
+                 if(cant > 0){
+                     Toast.makeText(this, "Se inserto un usuario", Toast.LENGTH_SHORT).show();
+                 }else{
+                     Toast.makeText(this, "No se inserto ningun campo", Toast.LENGTH_SHORT).show();
+                 }
+             }else{
+                 Toast.makeText(this,
+                         "Ingrese una contraseña entre 4 - 10 caracteres " +
+                                 "Debe contener minimo una letra mayuscula, una letra minuscula" +
+                                 "un caracter especial y un numero" , Toast.LENGTH_LONG).show();
+             }
           }else{
               Toast.makeText(this, "La Cedula es incorrecta", Toast.LENGTH_SHORT).show();
           }
@@ -90,36 +97,38 @@ public class MainActivityRegistrarMCLB extends AppCompatActivity {
         }
         return cedulaCorrecta;
     }
-    public boolean validar_Password(String password){
-        int continuos = 0;
-        int numero = 0;
-        int especial = 0;
-        int fin = 0xFF.toChar();
+    public boolean validarContraseña (String contraseña){
+        boolean rtn = true;
+        int seguidos = 0;
+        char ultimo = 0xFF;
         int minuscula = 0;
         int mayuscula = 0;
-        boolean es_validar = true;
-        if (password.length() < 6 || password.length() > 10) return false
-        for (i in 0; password.length) {
-            val c = password[i]
-            if (c <= ' ' || c > '~') {
-                es_validar = false
-                break
+        int numero = 0;
+        int especial = 0;
+        boolean espacio = false;
+        if(contraseña.length() < 5 || contraseña.length() > 10) return false; // tamaño
+        for(int i=0;i< contraseña.length(); i++){
+            char c = contraseña.charAt(i);
+            if(c <= ' ' || c > '~' ){
+                rtn = false; //Espacio o fuera de rango
+                break;
             }
-            if (c > ' ' && c < '0' || c >= ':' && c < 'A' || c >= '[' && c < 'a' || c >= '{' && c.toInt() < 127) {
-                especial++
+            if( (c > ' ' && c < '0') || (c >= ':' && c < 'A') || (c >= '[' && c < 'a') || (c >= '{' && c < 127) ){
+                especial++;
             }
-            if (c >= '0' && c < ':') numero++
-            if (c >= 'A' && c < '[') mayuscula++
-            if (c >= 'a' && c < '{') minuscula++
-            continuos = if (c == fin) continuos + 1 else 0
-            if (continuos >= 7) {
-                es_validar = false
-                break
+            if(c >= '0' && c < ':') numero++;
+            if(c >= 'A' && c < '[') mayuscula++;
+            if(c >= 'a' && c < '{') minuscula++;
+
+            seguidos = (c==ultimo) ? seguidos + 1 : 0;
+            if(seguidos >= 1){
+                rtn = false; // 3 seguidos
+                break;
             }
-            fin = c
+            ultimo = c;
         }
-        es_validar = es_validar && especial > 0 && numero > 0 && minuscula > 0 && mayuscula > 0
-        return es_validar
+        rtn = rtn && especial > 0 && numero > 0 && minuscula > 0 && mayuscula > 0;
+        return rtn;
     }
 
 }
