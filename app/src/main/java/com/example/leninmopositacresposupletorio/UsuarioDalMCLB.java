@@ -39,29 +39,31 @@ public class UsuarioDalMCLB {
         }
         return count;
     }
-    public ArrayList<String> select (){
-        ArrayList<String> list = null;
-        try{
+    public UsuarioMCLB selectByCedula (String cedula){
+
+        try {
             this.open();
             String select = "SELECT Cedula,Nombre,Apellido,Password " +
-                    "FROM Usuarios ";
-            Cursor cursor = sql.rawQuery(select,null);
-            if (cursor.moveToFirst()){
-                list = new ArrayList<String>();
-                do {
-                    //Cliente cliente = new Cliente();
-                    //agregar datos del cursor
-                    //list.add(cliente);
-                    list.add(cursor.getString(0) + " " + cursor.getString(1) + " " +
-                            cursor.getString(2) + " " + cursor.getString(3));
+                    "FROM Usuarios " +
+                    "WHERE Cedula=" + cedula;
 
-                }while (cursor.moveToNext());
+            Cursor cursor = sql.rawQuery(select,null);
+            if(cursor.moveToFirst()){
+                UsuarioMCLB usuario = new UsuarioMCLB();
+                usuario.setCedula(cursor.getString(0));
+                usuario.setNombre(cursor.getString(1));
+                usuario.setApellido(cursor.getString(2));
+                usuario.setContraseña(cursor.getString(3));
+                return usuario;
             }
+
         }catch (Exception e){
             throw e;
+
+
         }finally {
             sql.close();
         }
-        return list;
+        return null;
     }
 }

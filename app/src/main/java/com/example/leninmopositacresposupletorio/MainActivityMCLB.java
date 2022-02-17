@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivityMCLB extends AppCompatActivity {
     private EditText txtcedula;
@@ -33,7 +36,19 @@ public class MainActivityMCLB extends AppCompatActivity {
     }
 
     private void entrar() {
+        UsuarioMCLB user = new UsuarioMCLB();
+        UsuarioDalMCLB dal = new UsuarioDalMCLB(this);
         String cedula = txtcedula.getText().toString();
+        String contraseña = txtcontraseña.getText().toString();
+        user = dal.selectByCedula(cedula);
+        if(!cedula.equals("") && cedula.equals("")){
+            if(cedula.equals(user.getCedula()) && contraseña.equals(user.getContraseña())){
+
+            }
+        }else{
+            Toast.makeText(this, "Campos obligatorios", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void irRegistrar() {
