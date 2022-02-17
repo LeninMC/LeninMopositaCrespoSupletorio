@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LeninMopositaCrespoSupletorio">
         <activity
+            android:name=".MainActivityRegistrarMCLB"
+            android:exported="false" />
+        <activity
             android:name=".MainActivityMCLB"
             android:exported="true">
             <intent-filter>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivityMCLB">
+    tools:context=".MainActivityRegistrarMCLB">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,54 +17,57 @@
             android:layout_height="wrap_content"
             android:textSize="40dp"
             android:textAlignment="center"
-            android:text="Login" />
-
-
-        <EditText
-            android:id="@+id/edittext_user"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="20dp"
-            android:hint="Usuario"
-            android:inputType="textEmailAddress"
-            android:padding="15dp"
-            android:textSize="15sp" />
-
+            android:text="Registrar" />
 
         <EditText
-            android:id="@+id/edittext_password"
+            android:id="@+id/edittext_Cedula"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
-            android:hint="Password"
+            android:hint="Cedula"
             android:inputType="text"
-            android:padding="15dp"
-            android:textSize="15sp" />
+            android:padding="15dp" />
 
+        <EditText
+            android:id="@+id/edittext_Nombre"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:hint="Nombre"
+            android:inputType="text"
+            android:padding="15dp" />
+        <EditText
+            android:id="@+id/edittext_Apellido"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:hint="Apellido"
+            android:inputType="text"
+            android:padding="15dp" />
+
+        <EditText
+            android:id="@+id/edittext_Contraseña"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:hint="Contraseña"
+            android:inputType="text"
+            android:padding="15dp" />
         <Button
             android:id="@+id/buttonEntrar"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Entrar" />
-
-        <TextView
-            android:id="@+id/textViewMostrar"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:text="TextView" />
-
-        <Button
-            android:id="@+id/buttonRegistrar"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="Registrar" />
+
+
     </LinearLayout>
 </LinearLayout>

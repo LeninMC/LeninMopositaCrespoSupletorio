@@ -21,11 +21,13 @@ public class UsuarioDalMCLB {
         try {
             this.open();
             ContentValues values = new ContentValues();
+            values.put("Cedula", usuario.getCedula());
             values.put("Nombre", usuario.getNombre());
             values.put("Apellido", usuario.getApellido());
-            values.put("Correo", usuario.getCorreo());
+            values.put("Contraseña", usuario.getContraseña());
 
-            count = sql.insert("Clientes",null,values);
+
+            count = sql.insert("Usuarios",null,values);
 
         }catch (Exception e){
             throw e;
