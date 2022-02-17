@@ -69,12 +69,13 @@ public class MainActivityCrearListaMCLB extends AppCompatActivity {
 
             //int  descripcion =Integer.parseInt(ds.child("Descrip").getValue().toString());
             //String nombre = ds.child("Nombre").getValue().toString();
+        /*
             categorias.add(new Tipo_Tarea_MCLB(descripcion, nombre));
 
                     ArrayAdapter<Tipo_Tarea_MCLB> arrayAdapter =
                             new ArrayAdapter<>(MainActivityCrearListaMCLB.this,
                                     android.R.layout.simple_dropdown_item_1line, categorias);
-
+*/
 
 
             }
@@ -82,4 +83,3 @@ public class MainActivityCrearListaMCLB extends AppCompatActivity {
 
 
     }
-}
