@@ -46,15 +46,18 @@
             android:textSize="15sp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonEntrar"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Entrar" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textViewMostrar"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
             android:text="TextView" />
     </LinearLayout>
 </LinearLayout>
