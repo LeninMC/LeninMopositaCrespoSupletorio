@@ -27,6 +27,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:hint="Cedula"
+            android:maxLength="10"
             android:inputType="text"
             android:padding="15dp" />
 
@@ -62,10 +63,11 @@
             android:inputType="text"
             android:padding="15dp" />
         <Button
-            android:id="@+id/buttonEntrar"
+            android:id="@+id/buttonRegistrar"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onClicRegistrar"
             android:text="Registrar" />
 
 
