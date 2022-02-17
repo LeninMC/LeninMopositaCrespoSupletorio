@@ -14,12 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,30 +101,9 @@ public class CrearMCLB extends AppCompatActivity {
     }
 
     public void tipo_tarea_aj() {
-        final List<Tipo_Tarea_AJ> categorias = new ArrayList<>();
-        databaseReference.child("Tipo_Tarea").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot ds : snapshot.getChildren()) {
-                        int  descripcion =Integer.parseInt(ds.child("Descrip").getValue().toString());
-                        String nombre = ds.child("Nombre").getValue().toString();
-                        categorias.add(new Tipo_Tarea_AJ(descripcion, nombre));
-                    }
+        final List<Tipo_Tarea_MCLB> categorias = new ArrayList<>();
+        //databaseReference.child("Tipo_Tarea").addListenerForSingleValueEvent(new ValueEventListener() {
 
-                    ArrayAdapter<Tipo_Tarea_AJ> arrayAdapter =
-                            new ArrayAdapter<>(CrearTarea_AJ.this,
-                                    android.R.layout.simple_dropdown_item_1line, categorias);
-                    spinnerUsuarios.setAdapter(arrayAdapter);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
     }
 
