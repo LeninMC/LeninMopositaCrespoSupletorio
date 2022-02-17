@@ -71,6 +71,14 @@
             android:onClick="onClicRegistrar"
             android:text="Registrar" />
 
+        <Button
+            android:id="@+id/buttonRegresar"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClicRegresar"
+            android:text="Regresar" />
+
 
     </LinearLayout>
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.example.leninmopositacresposupletorio;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,14 @@ public class MainActivityRegistrarMCLB extends AppCompatActivity {
     public void onClicRegistrar(View view){
         registrar();
     }
+    public void onClicRegresar(View view){
+        regresar();
+    }
+
+    private void regresar() {
+        Intent intent = new Intent(this,MainActivityMCLB.class);
+        startActivity(intent);
+    }
 
     private void registrar() {
         UsuarioDalMCLB dal = new UsuarioDalMCLB(this);
@@ -45,28 +54,28 @@ public class MainActivityRegistrarMCLB extends AppCompatActivity {
         usuario.setApellido(apellido);
         usuario.setContraseña(contraseña);
         if(!nombre.equals("") && !apellido.equals("") && !apellido.equals("")) {
-          if(esCedula(cedula)){
-             if(validarContraseña(contraseña)){
+            if(!esCedula(cedula)) {
+                Toast.makeText(this, "Cedula incorrecta", Toast.LENGTH_SHORT).show();
+            }
+            if (!validarContraseña(contraseña)){
+                Toast.makeText(this,
+                        "Ingrese una contraseña entre 4 - 10 caracteres " +
+                                "Debe contener minimo una letra mayuscula, una letra minuscula" +
+                                "un caracter especial y un numero" , Toast.LENGTH_LONG).show();
+            }
                  long cant = dal.insert(usuario);
                  //limpiar controles
-                 txtcedula.setText("");
-                 txtnombre.setText("");
-                 txtapellido.setText("");
-                 txtcontraseña.setText("");
+                 //txtcedula.setText("");
+                 //txtnombre.setText("");
+                 //txtapellido.setText("");
+                 //txtcontraseña.setText("");
                  if(cant > 0){
                      Toast.makeText(this, "Se inserto un usuario", Toast.LENGTH_SHORT).show();
                  }else{
                      Toast.makeText(this, "No se inserto ningun campo", Toast.LENGTH_SHORT).show();
                  }
-             }else{
-                 Toast.makeText(this,
-                         "Ingrese una contraseña entre 4 - 10 caracteres " +
-                                 "Debe contener minimo una letra mayuscula, una letra minuscula" +
-                                 "un caracter especial y un numero" , Toast.LENGTH_LONG).show();
-             }
-          }else{
-              Toast.makeText(this, "La Cedula es incorrecta", Toast.LENGTH_SHORT).show();
-          }
+
+
 
         }else{
             Toast.makeText(this, "Campos obligatorios", Toast.LENGTH_SHORT).show();
@@ -106,7 +115,7 @@ public class MainActivityRegistrarMCLB extends AppCompatActivity {
         int numero = 0;
         int especial = 0;
         boolean espacio = false;
-        if(contraseña.length() < 5 || contraseña.length() > 10) return false; // tamaño
+        if(contraseña.length() < 4 || contraseña.length() > 10) return false; // tamaño
         for(int i=0;i< contraseña.length(); i++){
             char c = contraseña.charAt(i);
             if(c <= ' ' || c > '~' ){
@@ -121,7 +130,7 @@ public class MainActivityRegistrarMCLB extends AppCompatActivity {
             if(c >= 'a' && c < '{') minuscula++;
 
             seguidos = (c==ultimo) ? seguidos + 1 : 0;
-            if(seguidos >= 1){
+            if(seguidos >= 3){
                 rtn = false; // 3 seguidos
                 break;
             }

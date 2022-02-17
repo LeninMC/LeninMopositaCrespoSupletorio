@@ -21,7 +21,7 @@
 
 
         <EditText
-            android:id="@+id/edittext_user"
+            android:id="@+id/edittext_usuario"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
@@ -61,10 +61,11 @@
             android:text="TextView" />
 
         <Button
-            android:id="@+id/buttonRegistrar"
+            android:id="@+id/buttonirRegistrar"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onClicIrRegistrar"
             android:text="Registrar" />
     </LinearLayout>
 </LinearLayout>
